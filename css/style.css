@@ -43,7 +43,7 @@
     border-radius: 5px;
     border: none;
     transition: all 0.15s linear;
-    font-size: 1.1rem;
+    font-size: 0.9rem;
 }
 #input:focus{
     box-shadow: 0 0 0.4rem 0 #0af;
