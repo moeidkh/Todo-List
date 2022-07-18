@@ -125,9 +125,5 @@
 .completeItem{
     text-decoration: line-through;
     text-decoration-thickness: 0.13rem;
+    color: #aaa;
 }
-
-/* @media screen and (max-width: 768px) {
-    
-    
-} */

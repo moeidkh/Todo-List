@@ -23,7 +23,7 @@ input.addEventListener("keyup" , function(e){
             input.value = "";
             let obj = { }
             obj.todoTitle = inputValue;
-            obj.status = "incomplete";
+            obj.status = "Uncomplete";
             addTodo(obj);
             todoList.push(obj);
             localStorage.setItem("todo" , JSON.stringify(todoList));
@@ -38,10 +38,11 @@ addBtn.addEventListener("click" , function(){
         input.value = "";
         let obj = { }
         obj.todoTitle = inputValue;
-        obj.status = "incomplete";
+        obj.status = "Uncomplete";
         addTodo(obj);
         todoList.push(obj);
         localStorage.setItem("todo" , JSON.stringify(todoList));
+        input.focus()
     }
     else{
         alert("input is empty!")
@@ -52,7 +53,7 @@ clearBtn.addEventListener("click" , function(){
     boxesElem.forEach((element)=>{
         element.remove()
     })
-    localStorage.clear();
+    localStorage.removeItem("todo");
 })
 function addTodo(obj){
     let newElem = $.createElement("div");
@@ -67,24 +68,23 @@ function addTodo(obj){
     completeElem.addEventListener("click" , function(e){
         let h3Elem = e.target.parentElement.parentElement.firstChild;
         h3Elem.classList.toggle("completeItem");
-        let todo = h3Elem.innerHTML;
-        
+        let todo = h3Elem.innerHTML;        
         let index = todoList.findIndex(function(item){
             return item.todoTitle === todo;
         })
         if(completeElem.innerHTML != "Complete"){
             completeElem.innerHTML = "Complete";
-            todoList[index].status = "Incomplete";
+            todoList[index].status = "Uncomplete";
         }
         else{
-            completeElem.innerHTML = "Incomplete";
+            completeElem.innerHTML = "Uncomplete";
             todoList[index].status = "Complete";
         }
         localStorage.setItem("todo" , JSON.stringify(todoList))
     })
     if(obj.status == "Complete"){
         h3Elem.classList.add("completeItem");
-        completeElem.innerHTML = "Incomplete";
+        completeElem.innerHTML = "Uncomplete";
     }
     else{
         h3Elem.classList.remove("completeItem");
@@ -98,17 +98,11 @@ function addTodo(obj){
         let index = todoList.findIndex(function(item){
             return item.todoTitle === todo;
         })
-        if(index == 0){
-            todoList = [];
-        }
-        else{
-            todoList.splice(index,index);
-        }
+        todoList.splice(index , 1);
 
         localStorage.setItem("todo" , JSON.stringify(todoList));
         e.target.parentElement.parentElement.remove();
     })
-
     btnDelAndComp.appendChild(completeElem);
     btnDelAndComp.appendChild(deleteElem);
     newElem.appendChild(h3Elem);
