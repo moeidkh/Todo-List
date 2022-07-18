@@ -8,5 +8,8 @@
     .box{
         flex-direction: column;
         gap: 1rem;
-    }    
+    }
+    .btn-container{
+        flex-direction: column;
+    }
 }
